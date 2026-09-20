@@ -260,3 +260,19 @@ std::size_t bishop_table_entry_count() {
 }
 
 }
+
+// Slider lookup, shown for a rook on c3 (square 12). The last square
+// of each ray is left out of the mask: a blocker there hides nothing.
+//
+//   rank 5 |  .  .  -  .  .       R  the rook
+//   rank 4 |  .  .  x  .  .       x  square in the occupancy mask
+//   rank 3 |  -  x  R  x  -       -  ray square outside the mask
+//   rank 2 |  .  .  x  .  .
+//   rank 1 |  .  .  -  .  .
+//             a  b  c  d  e
+//
+//   index   = extract_bits(occupancy, mask[12])     4 bits here
+//   attacks = table[offset[12] + index]
+//
+// A corner rook has 6 mask bits and the centre has 4. A bishop has
+// at most 4.

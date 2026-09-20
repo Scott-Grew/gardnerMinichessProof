@@ -65,3 +65,14 @@ std::string move_text(const BoardMove& move);
 }
 
 #endif
+
+// Index of each square in Board::squares, from White's side.
+// index = rank_index * 5 + file_index.
+//
+//   rank 5 | 20 21 22 23 24
+//   rank 4 | 15 16 17 18 19
+//   rank 3 | 10 11 12 13 14
+//   rank 2 |  5  6  7  8  9
+//   rank 1 |  0  1  2  3  4
+//          +---------------
+//             a  b  c  d  e

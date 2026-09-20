@@ -138,3 +138,18 @@ CanonicalForm canonical_under_mirror(const Position& position) {
 }
 
 }
+
+// The two symmetries, shown on the starting position.
+//
+//   position          mirror_files        swap_colors
+//   r n b q k         k q b n r           r n b q k
+//   p p p p p         p p p p p           p p p p p
+//   . . . . .         . . . . .           . . . . .
+//   P P P P P         P P P P P           P P P P P
+//   R N B Q K         K Q B N R           R N B Q K
+//   White to move     White to move       Black to move
+//
+// mirror_files sends file f to 4 - f. swap_colors sends rank r to
+// 4 - r, changes every piece's colour and flips the side to move.
+// The canonical form is whichever of a position and its mirror has
+// the smaller exact key.

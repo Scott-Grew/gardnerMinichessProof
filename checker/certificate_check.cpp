@@ -320,3 +320,28 @@ CheckOutcome check_certificate(
 }
 
 }
+
+// Certificate file, little-endian.
+//
+//   offset 0     8 bytes    "GARDNER1"
+//   offset 8     8 bytes    entry count
+//   offset 16    20 bytes per entry, ascending by (low, high)
+//
+//   entry  | key.low 8 | key.high 8 | from 1 | to 1 | promo 1 | 0 |
+//
+// What acceptance means. S is the set of positions in the file, and
+// the defender is White in every one of them.
+//
+//               root  (must be in S)
+//                 |
+//     +-----------v---------------------------------+
+//     |  Black to move           White to move      |
+//     |  every legal move        the stored move is |
+//     |  lands in S              legal, lands in S  |
+//     |          \                   /              |
+//     |           v                 v               |
+//     |            other positions in S             |
+//     +---------------------------------------------+
+//
+// No move leaves S and White is never checkmated inside it, so
+// White cannot be checkmated from the root.

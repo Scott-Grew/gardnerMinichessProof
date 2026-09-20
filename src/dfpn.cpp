@@ -342,3 +342,21 @@ const SearchStatistics& ProofSearch::statistics() const {
 }
 
 }
+
+// Proof numbers at the two kinds of node. Each pair is
+// (proof, disproof) and White is always the prover.
+//
+//        White to move: ONE winning move is enough
+//        proof = min(1, 3, 2) = 1     disproof = 2 + 1 + 4 = 7
+//           /            |            \
+//       (1, 2)        (3, 1)        (2, 4)
+//
+//        Black to move: EVERY reply must lose
+//        proof = 1 + 3 + 2 = 6        disproof = min(2, 1, 4) = 1
+//           /            |            \
+//       (1, 2)        (3, 1)        (2, 4)
+//
+// (0, infinite) is proved: Black is checkmated. (infinite, 0) is
+// disproved. The search descends into the child with the smallest
+// proof number at a White node and the smallest disproof number at
+// a Black node, and returns when either threshold is reached.

@@ -146,3 +146,15 @@ std::array<std::uint64_t, 26> men_histogram(
 }
 
 }
+
+// Certificate file, little-endian.
+//
+//   offset 0     8 bytes    "GARDNER1"
+//   offset 8     8 bytes    entry count
+//   offset 16    20 bytes per entry, ascending by (low, high)
+//
+//   entry  | key.low 8 | key.high 8 | from 1 | to 1 | promo 1 | 0 |
+//
+// Black to move: from and to are 255. White to move: the stored
+// move in the frame of the stored position, with promo 0 or 2 to 5
+// for knight, bishop, rook, queen.

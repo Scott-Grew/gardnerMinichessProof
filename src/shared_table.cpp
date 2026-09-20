@@ -116,3 +116,16 @@ std::size_t SharedTable::occupied_count() const {
 }
 
 }
+
+// One lookup. A key hashes to a bucket of four neighbouring slots.
+//
+//   mix(key) & index_mask
+//          |
+//          v
+//   ... [ slot ][ slot ][ slot ][ slot ] ...    wraps at the end
+//
+//   find   the slot in the bucket holding exactly this key
+//   store  that slot, else the first empty one, else the slot
+//          with the smallest work
+//
+//   slot = key | proof | disproof | work | best move | occupied
